@@ -87,7 +87,7 @@ class UserController {
             const token = createToken({
                 id: user.id,
             });
-            res.status(200).json({ token, email: user.email });
+            res.status(200).json({token, email: user.email});
         } catch (error) {
             console.log(error);
             // next(error);
