@@ -20,18 +20,6 @@ List of available endpoints :
 - `POST /register`
 - `POST /login`
 
-And routes below need authentication :
-
-- `GET /clubs`
-- `GET /clubs/:id`
-- `GET /myclubs`
-- `POST /myclubs/:ClubId`
-
-Routes below need authentication & authorization :
-
-- `DELETE /myclubs/:id`
-- `PUT /clubs/:myClubId`
-
 &nbsp;
 
 ## 1. POST /register
@@ -41,7 +29,7 @@ Request:
 - body:
 ```json
 {
-  "fullName": "string",
+  "username": "string",
   "email": "string",
   "password": "string"
 }
@@ -50,9 +38,9 @@ Request:
 _Response (201 - Created)_
 ```json
 {
-  "id": "integer",
+  "username": "string",
   "email": "string",
-  "fullName": "string"
+  "password":"string"
 }
 ```
 
@@ -62,6 +50,10 @@ _Response (400 - Bad Request)_
 
 {
   "message": "Email must be unique"
+}
+OR
+{
+  "message": "Email is required"
 }
 OR
 {
@@ -112,8 +104,6 @@ _Response (401 - Unauthorized)_
 ```
 
 &nbsp;
-
-
 
 ## Global Error
 
