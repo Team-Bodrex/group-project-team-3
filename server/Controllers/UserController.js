@@ -27,21 +27,21 @@ class UserController {
     static async login(req, res, next) {
         try {
             const { email, password } = req.body;
-            if (!email) throw { name: "BadRequest", msg: "email must be exist" };
-            if (!password)
-                throw { name: "BadRequest", msg: "password must be exist" };
+            if (!email) throw { name: "EmailBadRequest"};
+            if (!password) throw { name: "PasswordBadRequest"};
+            
             const data = await User.findOne({ where: { email } });
-            if (!data) {
-                throw { name: "unauthorized", msg: "email/password invalid" };
-            }
+            if (!data) { throw { name: "Unauthorized"}}
+            
             const validPassword = comparePassword(password, data.password);
 
-            if (!validPassword)
-                throw { name: "unauthorized", msg: "email/password invalid" };
+            if (!validPassword) throw { name: "Unauthorized"};
+
             const access_token = signToken({ id: data.id });
+
             res.status(201).json({ token: access_token });
         } catch (error) {
-            res.status(401).json({ message: "Invalid email/password" });
+            next(error);
         }
     }
 }
