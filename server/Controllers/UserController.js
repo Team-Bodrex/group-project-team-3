@@ -66,6 +66,14 @@ class UserController {
                     Accept: "application/json",
                 },
             });
+            let payload = await axios({
+                method: "get",
+                url: "https://api.github.com/user",
+                headers: {
+                    Authorization: "Bearer " + data.access_token,
+                },
+            });
+            console.log(payload);
             // console.log(data);
         } catch (error) {
             console.log(error);
