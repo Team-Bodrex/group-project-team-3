@@ -25,6 +25,7 @@ export default function Login() {
       //   });
       //   localStorage.access_token = response.data.access_token;
       localStorage.email = input.email;
+      localStorage.username = input.email;
 
       navigate("/");
     } catch (error) {

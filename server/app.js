@@ -23,9 +23,28 @@ const io = new Server(httpServer, {
 const port = 3000
 
 // Start of Socket Settings
+let users = []
+
+
 io.on("connection", (socket) => {
-    console.log("New user connected!", socket.id);
+    // console.log("New user connected!", socket.id);
+    // console.log("username :", socket.handshake.auth.username);
+
+    if (socket.handshake.auth.username) {
+        users.push({
+            id: socket.id,
+            username: socket.handshake.auth.username
+        })
+    }
+
+    console.log(users);
+
+
     socket.emit("message", "Welcome to the socket server" + socket.id)
+
+    socket.on("disconnect", () => {
+        users = users.filter(user => user.id !== socket.id)
+    })
 
 });
 // End of Socket Settings
