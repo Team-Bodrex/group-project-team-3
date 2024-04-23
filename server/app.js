@@ -24,7 +24,9 @@ const port = 3000
 
 // Start of Socket Settings
 io.on("connection", (socket) => {
-    // ...
+    console.log("New user connected!", socket.id);
+    socket.emit("message", "Welcome to the socket server" + socket.id)
+
 });
 // End of Socket Settings
 

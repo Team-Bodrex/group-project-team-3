@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
 import { io } from "socket.io-client";
-const socket = io("https://localhost:3000");
+const socket = io("http://localhost:3000");
 
 function App() {
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    socket.on("message", (someMessage) => {
+      console.log(someMessage);
+    });
+
+    return () => {
+      socket.off("message");
+    };
+  }, []);
 
   return (
     <>
