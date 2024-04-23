@@ -39,11 +39,16 @@ io.on("connection", (socket) => {
 
     console.log(users);
 
-
+    //socket.emit infoin ke orang yang connect kalau dia dapat message
     socket.emit("message", "Welcome to the socket server" + socket.id)
+
+    //io.emit info ke semua orang kalo ada user yang connect
+    io.emit("users:online", users)
+
 
     socket.on("disconnect", () => {
         users = users.filter(user => user.id !== socket.id)
+        io.emit("users:online", users)
     })
 
 });
