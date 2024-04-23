@@ -20,8 +20,7 @@ class UserController {
             };
             res.status(201).json(responseData);
         } catch (error) {
-            console.log(error)
-            res.status(400).json({ message: "Email must be unique" });
+            next(error);
         }
     }
 
