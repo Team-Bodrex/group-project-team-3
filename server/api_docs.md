@@ -105,6 +105,30 @@ _Response (401 - Unauthorized)_
 
 &nbsp;
 
+
+## GITHUB login
+
+## GET /github-login
+Request:
+
+params:
+```json
+{
+  "code": "string"
+}
+```
+
+&nbsp;
+Response (200 - OK)
+```json
+{
+  "access_token": "string",
+  "email": "string"
+}
+```
+
+&nbsp;
+
 ## Global Error
 
 _Response (401 - Unauthorized)_
