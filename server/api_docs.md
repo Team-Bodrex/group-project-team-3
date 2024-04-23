@@ -6,22 +6,9 @@
 
 _User_
 ```
-- fullName: string, required
+- username: string, required
 - email: string, required, unique
 - password: string, required
-```
-
-_Club_
-```
-- title: string, required
-- imageUrl: string, required
-- description: string, required
-```
-
-_MyClub_
-```
-- UserId : integer, required
-- ClubId: integer, required
 ```
 
 &nbsp;
