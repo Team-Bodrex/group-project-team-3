@@ -73,8 +73,21 @@ class UserController {
                     Authorization: "Bearer " + data.access_token,
                 },
             });
-            console.log(payload);
             // console.log(data);
+            console.log(payload);
+            const [user, created] = await User.findOrCreate({
+                where: { email: `${payload.data.login}@mail.com` },
+                defaults: {
+                    username: payload.data.login,
+                    email: `${payload.data.login}@mail.com`,
+                    password: String(Math.random() * 10000),
+                },
+            });
+            // console.log(user, created);
+            const token = createToken({
+                id: user.id,
+            });
+            res.status(200).json({ token, email: user.email });
         } catch (error) {
             console.log(error);
             // next(error);
