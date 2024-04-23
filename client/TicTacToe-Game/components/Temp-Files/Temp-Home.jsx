@@ -6,6 +6,25 @@ import socket from "../../src/socket";
 
 export default function Home() {
   const [users, setUsers] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+
+  const handleNewMessage = (event) => {
+    setNewMessage(event.target.value);
+  };
+
+  function handleSendMessage(event) {
+    event.preventDefault();
+
+    socket.emit("messages:new", {
+      from: localStorage.username,
+      message: newMessage,
+    });
+
+    setNewMessage("");
+  }
+  //bisa juga pakai socket auth untuk menggantikan localStorage username
+  // console.log(socket.auth.username);
 
   useEffect(() => {
     socket.auth = {
@@ -17,10 +36,17 @@ export default function Home() {
   useEffect(() => {
     socket.on("users:online", (onlineUsers) => {
       setUsers(onlineUsers);
-      // console.log(users);
     });
+
+    socket.on("messages:info", (message) => {
+      setMessages((prevMessages) => {
+        return [...prevMessages, message];
+      });
+    });
+
     return () => {
       socket.off("users:online");
+      socket.off("messages:info");
     };
   }, []);
 

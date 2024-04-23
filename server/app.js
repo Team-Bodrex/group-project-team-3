@@ -46,6 +46,10 @@ io.on("connection", (socket) => {
     io.emit("users:online", users)
 
 
+    socket.on("messages:new", (newMessage) => {
+        io.emit("messages:info", newMessage)
+    })
+
     socket.on("disconnect", () => {
         users = users.filter(user => user.id !== socket.id)
         io.emit("users:online", users)
