@@ -61,6 +61,26 @@ export default function Home() {
           </p>
         );
       })}
+      <h2>Send Chat:</h2>
+      <form onSubmit={handleSendMessage}>
+        <input
+          type="text"
+          placeholder="Input message..."
+          onChange={handleNewMessage}
+          value={newMessage}
+        />
+        <button type="submit">Send Chat</button>
+      </form>
+      <h2>Chat Box:</h2>
+      {messages.map((msg) => {
+        return msg.from === localStorage.username ? (
+          <p>You: {msg.message}</p>
+        ) : (
+          <p>
+            {msg.from}: {msg.message}
+          </p>
+        );
+      })}
     </>
   );
 }
