@@ -30,6 +30,11 @@ const allUsers = {};
 const allRooms = [];
 
 io.on("connection", (socket) => {
+  allUsers[socket.id] = {
+    socket: socket,
+    online: true,
+  };
+
   // console.log("New user connected!", socket.id);
   // console.log("username :", socket.handshake.auth.username);
 
