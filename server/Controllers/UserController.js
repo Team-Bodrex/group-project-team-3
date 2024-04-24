@@ -1,7 +1,7 @@
 
 const { comparePassword } = require("../helpers/bycript");
 const { signToken } = require("../helpers/jwt")
-
+const axios = require("axios");
 const { User } = require("../models");
 const CLIENT_ID = '6fb79fdd2437be1ef4e3'
 const CLIENT_SECRET = '21785dfd613d5b3e9cca84efada23df33f793c10'
@@ -17,9 +17,11 @@ class UserController {
             const responseData = {
                 username: user.username,
                 email: user.email,
+                
             };
             res.status(201).json(responseData);
         } catch (error) {
+            console.log(error)
             next(error);
         }
     }
@@ -82,7 +84,7 @@ class UserController {
                 },
             });
             // console.log(user, created);
-            const token = createToken({
+            const token = signToken({
                 id: user.id,
             });
             res.status(200).json({ token, email: user.email, username: user.username });
