@@ -34,7 +34,6 @@ io.on("connection", (socket) => {
     socket: socket,
     online: true,
   };
-
   // console.log("New user connected!", socket.id);
   // console.log("username :", socket.handshake.auth.username);
 
