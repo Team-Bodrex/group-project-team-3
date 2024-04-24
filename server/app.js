@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const express = require('express');
-const router  = require('./router');
+const router = require('./router');
 const errorHandlers = require('./middleware/errorHandlers')
 const app = express();
 
@@ -62,7 +62,7 @@ io.on("connection", (socket) => {
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
+app.use(cors())
 
 // Testing Site
 app.get('/', (req, res) => {
