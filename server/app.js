@@ -3,7 +3,8 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const express = require('express');
-const router = require('./router');
+const router  = require('./router');
+const errorHandlers = require('./middleware/errorHandlers')
 const app = express();
 
 // Start of Socket Settings
@@ -62,11 +63,19 @@ io.on("connection", (socket) => {
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+
 // Testing Site
 app.get('/', (req, res) => {
     res.send('Hello World! Testing')
 })
 // Testing Site
+
+
+// Using router
+app.use(router)
+
+// Using error handlers
+app.use(errorHandlers)
 
 
 // Start of Socket Settings
@@ -75,7 +84,5 @@ httpServer.listen(port, () => {
 })
 // End of Socket Settings
 
-
-app.use(router)
 
 // module.exports = app;
