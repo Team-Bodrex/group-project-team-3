@@ -27,7 +27,7 @@ export default function Login() {
       localStorage.email = input.email;
       localStorage.username = input.email;
 
-      navigate("/");
+      navigate("/chat-temp");
     } catch (error) {
       console.log(error);
       const errMsg = error.response.data.message;

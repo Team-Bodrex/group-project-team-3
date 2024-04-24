@@ -13,7 +13,7 @@ import Home from "../components/Temp-Files/Temp-Home.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: "/login-temp",
     element: <Login />,
     // loader: () => {
     //   if (localStorage.access_token) {
@@ -23,7 +23,7 @@ const router = createBrowserRouter([
     // },
   },
   {
-    path: "/",
+    path: "/chat-temp",
     element: <Home />,
   },
 ]);
