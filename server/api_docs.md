@@ -5,6 +5,7 @@
 ## Models :
 
 _User_
+
 ```
 - username: string, required
 - email: string, required, unique
@@ -19,14 +20,15 @@ List of available endpoints :
 
 - `POST /register`
 - `POST /login`
-
-&nbsp;
+- `GET /github-login`
+  &nbsp;
 
 ## 1. POST /register
 
 Request:
 
 - body:
+
 ```json
 {
   "username": "string",
@@ -36,11 +38,12 @@ Request:
 ```
 
 _Response (201 - Created)_
+
 ```json
 {
   "username": "string",
   "email": "string",
-  "password":"string"
+  "password": "string"
 }
 ```
 
@@ -68,6 +71,7 @@ OR
 Request:
 
 - body:
+
 ```json
 {
   "email": "string",
@@ -105,13 +109,14 @@ _Response (401 - Unauthorized)_
 
 &nbsp;
 
-
 ## GITHUB login
 
 ## GET /github-login
+
 Request:
 
 params:
+
 ```json
 {
   "code": "string"
@@ -120,9 +125,10 @@ params:
 
 &nbsp;
 Response (200 - OK)
+
 ```json
 {
-  "username" : "string",
+  "username": "string",
   "access_token": "string",
   "email": "string"
 }
