@@ -22,7 +22,7 @@ const io = new Server(httpServer, {
 });
 // End of Socket Settings
 
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Start of Socket Settings
 let users = [];
@@ -151,8 +151,8 @@ app.use(router);
 app.use(errorHandlers);
 
 // Start of Socket Settings
-httpServer.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+httpServer.listen(PORT, () => {
+  console.log(`Example app listening on PORT ${PORT}`);
 });
 // End of Socket Settings
 
