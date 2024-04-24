@@ -6,6 +6,8 @@ const express = require('express');
 const router = require('./router');
 const errorHandlers = require('./middleware/errorHandlers')
 const app = express();
+const cors = require('cors')
+
 
 // Start of Socket Settings
 const { createServer } = require("http");
