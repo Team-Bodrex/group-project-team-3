@@ -122,6 +122,7 @@ params:
 Response (200 - OK)
 ```json
 {
+  "username" : "string",
   "access_token": "string",
   "email": "string"
 }
