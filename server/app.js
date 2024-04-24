@@ -156,4 +156,4 @@ httpServer.listen(PORT, () => {
 });
 // End of Socket Settings
 
-// module.exports = app;
+module.exports = app;
