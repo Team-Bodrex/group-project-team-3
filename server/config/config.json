@@ -1,17 +1,17 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "admin",
     "database": "DB_group-project",
     "host": "localhost",
     "dialect": "postgres"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
+    "username": "postgres",
+    "password": "admin",
+    "database": "DB_group-project-test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   },
   "production": {
     "username": "root",
