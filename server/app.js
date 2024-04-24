@@ -7,8 +7,69 @@ const router  = require('./router');
 const errorHandlers = require('./middleware/errorHandlers')
 const app = express();
 
+// Start of Socket Settings
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+// End of Socket Settings
+
+// Start of Socket Settings
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+    cors: {
+        origin: "http://localhost:5173"
+    }
+});
+// End of Socket Settings
+
+const port = 3000
+
+// Start of Socket Settings
+let users = []
+
+
+io.on("connection", (socket) => {
+    // console.log("New user connected!", socket.id);
+    // console.log("username :", socket.handshake.auth.username);
+
+    if (socket.handshake.auth.username) {
+        users.push({
+            id: socket.id,
+            username: socket.handshake.auth.username
+        })
+    }
+
+    console.log(users);
+
+    //socket.emit infoin ke orang yang connect kalau dia dapat message
+    socket.emit("message", "Welcome to the socket server" + socket.id)
+
+    //io.emit info ke semua orang kalo ada user yang connect
+    io.emit("users:online", users)
+
+
+    socket.on("messages:new", (newMessage) => {
+        io.emit("messages:info", newMessage)
+    })
+
+    socket.on("disconnect", () => {
+        users = users.filter(user => user.id !== socket.id)
+        io.emit("users:online", users)
+    })
+
+});
+// End of Socket Settings
+
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+
+// Testing Site
+app.get('/', (req, res) => {
+    res.send('Hello World! Testing')
+})
+// Testing Site
+
 
 // Using router
 app.use(router)
@@ -16,4 +77,12 @@ app.use(router)
 // Using error handlers
 app.use(errorHandlers)
 
-module.exports = app;
+
+// Start of Socket Settings
+httpServer.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})
+// End of Socket Settings
+
+
+// module.exports = app;
