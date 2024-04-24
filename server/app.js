@@ -118,18 +118,16 @@ io.on("connection", (socket) => {
     currentUser.online = false;
     currentUser.playing = false;
 
-    for (let index = 0; index < allRooms.length; index++) {
-      const { player1, player2 } = allRooms[index];
-
+    // Find the room the disconnecting user belongs to and inform the opponent if any
+    const roomIndex = allRooms.findIndex((room) => room.player1.socket.id === socket.id || (room.player2 && room.player2.socket.id === socket.id));
+    if (roomIndex !== -1) {
+      const { player1, player2 } = allRooms[roomIndex];
       if (player1.socket.id === socket.id) {
-        player2.socket.emit("opponentLeftMatch");
-        break;
-      }
-
-      if (player2.socket.id === socket.id) {
+        if (player2) player2.socket.emit("opponentLeftMatch");
+      } else {
         player1.socket.emit("opponentLeftMatch");
-        break;
       }
+      allRooms.splice(roomIndex, 1); // Remove the room from allRooms array
     }
   });
   //End of Game Sockets
