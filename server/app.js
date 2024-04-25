@@ -17,7 +17,7 @@ const { Server } = require("socket.io");
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://tictactoe-timbodrex.valdifirstianto.online",
   },
 });
 // End of Socket Settings
@@ -156,4 +156,4 @@ httpServer.listen(PORT, () => {
 });
 // End of Socket Settings
 
-module.exports = app;
+// module.exports = app;
