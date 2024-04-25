@@ -83,7 +83,7 @@ _Response (200 - OK)_
 
 ```json
 {
-  "access_token": "string"
+  "token": "string"
 }
 ```
 
@@ -129,7 +129,7 @@ Response (200 - OK)
 ```json
 {
   "username": "string",
-  "access_token": "string",
+  "token": "string",
   "email": "string"
 }
 ```
